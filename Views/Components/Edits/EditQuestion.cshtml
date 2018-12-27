@@ -1,0 +1,38 @@
+﻿@using BBCWebAPI.Models;
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit</title>
+    <link rel="stylesheet" href="~/homepage/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/components/css/Edit.css">
+</head>
+
+<body>
+    <div>
+        <form action="/HomePage/ListQuestionPage/EditQuestionPage/UpdateQuestion" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="hidden" asp-for="ID" />
+                    <div class="form-group">
+                        <label>Content</label><br />
+                        <textarea class="txtEdit" name="content">@ViewBag.questionItem.Content</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>TypeQuestion</label><br />
+                        <textarea class="txtEdit" name="typeQuestion">@ViewBag.questionItem.TypeQuestion</textarea>
+                    </div>                   
+                </div>
+            </div>
+            <div class="row">
+                <input class="btnSave" type="submit" name="Save" value="Save" />
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

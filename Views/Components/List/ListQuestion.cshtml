@@ -1,0 +1,94 @@
+﻿@using BBCWebAPI.Models;
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/components/css/List.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="w3-container">
+        <div class="w3-responsive">
+            <table class="w3-table-all">
+                <thead>
+                    <tr>
+                        <th>Content</th>
+                        <th>TypeQuestion</th>
+                        <th>Answer</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Question question in ViewBag.listQuestions)
+                    {
+                        var myModal = "myModal" + question.QuestionID.Trim().ToString();
+                        <tr>
+                            <td class="ellipsis">@question.Content</td>
+                            <td class="ellipsis">@question.TypeQuestion</td>   
+                            <td>
+                                <img onclick="location.href='@Url.Action("ToListAnswerPage".Trim(),"Answer",new { questionID=question.QuestionID.Trim(),contentQuestion=question.Content})'"
+                                     src="~/components/images/answer.png" />
+                            </td>
+                            <td>
+                                <img onclick="location.href='@Url.Action("ToEditQuestionPage".Trim(),"Question",new { questionID=question.QuestionID.Trim(),lessonID=ViewBag.lessonID,lessonName=ViewBag.lessonName})'"
+                                     src="~/components/images/edit.png" />
+                            </td>
+                            <td>
+                                <img data-toggle="modal" data-target="#@myModal" src="~/components/images/delete.png" />
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="@myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" style="width:100%;text-align:center;">
+                                                    Are you sure you want to delete question "@question.Content"?
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="btn-group" style="width:100%;">
+                                                    <button class="btnPopup" id="btn_OK"
+                                                            style="margin: 20px;
+                                                                    width: 100px;
+                                                                    width: 100px;
+                                                                    height: 50px;
+                                                                    margin-left:50px;
+                                                                    border: 1px solid white;
+                                                                    border-radius: 4px;"
+                                                            onclick="location.href='@Url.Action("DeleteQuestion","Question",new {questionID=question.QuestionID.Trim()})'">
+                                                        OK
+                                                    </button>
+                                                    <button data-dismiss="modal"
+                                                            class="btnPopup"
+                                                            style="margin: 20px;
+                                                            width: 100px;
+                                                            width: 100px;
+                                                            height: 50px;
+                                                            border: 1px solid white;
+                                                            border-radius: 4px;">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

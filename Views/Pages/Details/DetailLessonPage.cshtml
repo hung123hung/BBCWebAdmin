@@ -1,0 +1,163 @@
+﻿@using BBCWebAPI.Models;
+@using BBCWebAPI.Controllers.UI;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | Starter</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="~/homepage/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="~/homepage/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" type="text/css" href="~/homepage/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" type="text/css" href="~/homepage/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+    page. However, you can choose any other skin. Make sure you
+    apply the skin class to the body tag so the changes take effect. -->
+    <link rel="stylesheet" type="text/css" href="~/homepage/css/skins/skin-blue.min.css">
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Main Header -->
+        <header class="main-header">
+
+            <!-- Logo -->
+            <a href="homepage.html" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>BBC</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Admin</b></span>
+            </a>
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <li class="dropdown messages-menu">
+                            <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="~/login/images/logo.png" class="user-image" alt="User Image">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">Nguyễn Văn Hùng</span>
+                            </a>
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+                        <li>
+                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="~/login/images/logo.png" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>Nguyễn Văn Hùng</p>
+                        <!-- Status -->
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>
+
+                <!-- search form (Optional) -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu" data-widget="tree">
+                    <!-- Optionally, you can add icons to the links -->
+                    @if (ViewBag.listTopics != null)
+                    {
+                        @foreach (Topic topic in ViewBag.listTopics)
+                        {
+                            @*<li class="active"><a href="/HomePage" id=@topic.ID><i class="fa fa-link"></i> <span>@topic.Name</span></a></li>*@
+                            <li class="active"><i class="fa fa-link"></i>@Html.ActionLink(topic.Name, "HomePage", new { topicID = topic.ID.Trim(), topicName = topic.Name })</li>
+
+                        }
+                    }
+                    else
+                    {
+                        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Documents</span></a></li>
+                    }
+
+                </ul>
+                <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                @if (ViewBag.topicName != null)
+                {
+                    <h1>Welcome to Topic about "@ViewBag.topicName" </h1>
+                }
+                else
+                {
+                    <h1>Welcome to Topic about "6 MINUTE ENGLISH"</h1>
+                }
+            </section>
+            <!-- Main content -->
+            <section class="content container-fluid">
+                <!--Use component -->
+                <div>@await Html.PartialAsync("~/Views/Components/Details/DetailLesson.cshtml")</div>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="pull-right hidden-xs">
+                Anything you want
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2016 <a href="#">Nguyễn Văn Hùng</a>.</strong>
+            <br>
+            <strong>Contact us:<a>0987337257</a></strong>
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery 3 -->
+    <script src="~/homepage/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/homepage/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/homepage/js/adminlte.min.js"></script> -->
+</body>
+
+</html>

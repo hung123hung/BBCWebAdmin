@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>CreateLesson</title>
+    <link rel="stylesheet" href="~/homepage/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/components/css/Create.css">
+</head>
+
+<body>
+    <form action="/HomePage/ListQuestionPage/ListAnswerPage/InsertAnswer" method="post">
+        <div class="formgroup">
+            <label class="lblCreate">Content</label><input class="txtCreate" type="text" name="content" />
+        </div>
+        <div class="formgroup">
+            <label class="lblCreate">Correct</label><input class="txtCreate" type="text" name="correct" />
+        </div>
+        <div class="formgroup">
+            <input type="submit" value="Create" class="btnAdd" />
+        </div>
+    </form>
+</body>
+
+</html>
