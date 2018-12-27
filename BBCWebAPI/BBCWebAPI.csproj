@@ -11,6 +11,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\**" />
+    <Content Remove="Interfaces\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
+    <None Remove="Interfaces\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\homepage\bower_components\bootstrap\.bower.json" />
     <Content Include="wwwroot\homepage\bower_components\bootstrap\bower.json" />
     <Content Include="wwwroot\homepage\bower_components\bootstrap\dist\css\bootstrap-theme.css" />
@@ -1679,7 +1686,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
